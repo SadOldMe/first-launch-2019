@@ -8,7 +8,7 @@ Also, when creating objects, use these prefixes:
 - btn_ for  button
 - joy_ for joystick
 
-Downloads & Links:
+Links & Downloads:
 
 - http://first.wpi.edu/FRC/roborio/release/docs/cpp/ Documentation
 - https://phoenix-documentation.readthedocs.io/en/latest/ch03_PrimerPhoenixSoft.html Info on talons
