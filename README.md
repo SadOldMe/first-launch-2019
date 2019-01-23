@@ -1,6 +1,8 @@
 # first-launch-2019
 This repository consists of any files related to FIRST Launch 2019 - DESTINATION: Deep Space
 
+When uploading a robot code file, please title it "Robot_#" where # is the number after the most previous (i.e. if Robot_1 is present, call it Robot_2)
+
 Also, when creating objects, use these prefixes:
 
 - mtr_  for motor
