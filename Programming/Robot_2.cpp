@@ -1,61 +1,52 @@
 /*----------------------------------------------------------------------------*/
-/* Copyright (c) 20WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-7-2018 FIRST. All Rights Reserved.                        */
+/* Copyright (c) 2019                                                         */
+/* 2018 FIRST. All Rights Reserved.                                           */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
 /* must be accompanied by the FIRST BSD license file in the root directory of */
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
+//All of the libraries for the robot to take functions and information from
+#include "Robot.h"
+#include <iostream>
+#include <Joystick.h>
+#include <Drive/DifferentialDrive.h>
+#include <frc/smartdashboard/SmartDashboard.h>
+#include <Spark.h>
+#include <Talon.h>
+#include <Solenoid.h>
+#include <Encoder.h>
+#include <ctre/Phoenix.h>
 
-  //All of the libraries for the robot to take functions and information from
-  #include "Robot.h"
-  #include <iostream>
-  #include <Joystick.h>
-  #include <Drive/DifferentialDrive.h>
-  #include <frc/smartdashboard/SmartDashboard.h>
-  #include <Spark.h>
-  #include <Talon.h>
-  #include <Solenoid.h>
-  #include <Encoder.h>
-  #include <ctre/Phoenix.h>
+//Declare Variables
+int speed = 1;
 
-  //Declare Variables
-  int speed = 1;
+//Joystick decleration
+frc::Joystick joy_1 { 0 };
 
-  //Joystick decleration
-  frc::Joystick joy_1 { 0 };
+/***SPARK***/
 
-  /***SPARK***/
+//This creates the Spark differential drive
+//Defines the motors
+frc::Spark mtr_sparkLeft { 0 };
+frc::Spark mtr_sparkRight { 1 };
 
-  //This creates the Spark differential drive
-  //Defines the motors
-  frc::Spark mtr_left { 0 };
-  frc::Spark mtr_right { 1 };
+//Combines motors into the differential drive
+frc::DifferentialDrive drv_wheelsSpark {mtr_left, mtr_right};
 
-  //Combines motors into the differential drive
-  frc::DifferentialDrive drv_wheels {mtr_left, mtr_right};
+/***TALON***/
+//Defines the motors
+frc::Talon mtr_talonLeft { 0 };
+frc::Talon mtr_talonRight { 1 };
 
-  /***TALON***/
-
-  //TalonSRX srx = { 0 };
-
-  //Defines the motors
-  frc::Talon mtr_left2 { 0 };
-  frc::Talon mtr_right2 { 1 };
-
-  //Combines motors into the differential drive
-  frc::DifferentialDrive drv_wheelsTalon {mtr_left2, mtr_right2};
-
-
-    
+//Combines motors into the differential drive
+frc::DifferentialDrive drv_wheelsTalon {mtr_left2, mtr_right2};
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
-
   //srx.Set(ControlMode::PercentOutput, 0);
-
 }
 
 /**
@@ -67,7 +58,6 @@ void Robot::RobotInit() {
  * LiveWindow and SmartDashboard integrated updating.
  */
 void Robot::RobotPeriodic() {}
-
 /**
  * This autonomous (along with the chooser code above) shows how to select
  * between different autonomous modes using the dashboard. The sendable chooser
@@ -100,11 +90,7 @@ void Robot::AutonomousPeriodic() {
   }
 }
 
-void Robot::TeleopInit() {
-
-
-
-}
+void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
 
@@ -127,13 +113,9 @@ drv_wheels.TankDrive(-joy_1.GetRawAxis(3), -joy_1.GetRawAxis(1), true);
 
 /*Tank Drive for 6 axes remote*/
 //drv_wheelsTalon.TankDrive(-joy_1.GetRawAxis(5) * speed, -joy_1.GetRawAxis(1) * speed, true);
-
 }
 
-
 void Robot::TestPeriodic() {}
-
-
 
 #ifndef RUNNING_FRC_TESTS
 int main() { return frc::StartRobot<Robot>(); }
