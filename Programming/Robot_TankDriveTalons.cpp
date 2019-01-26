@@ -25,10 +25,18 @@ class Robot : public frc::IterativeRobot {
 
     //DON'T FORGET SEMICOLONS HERE!!!
 
+    /***DEFINE VATAIBLES***/
+
     Joystick joy_xbox { 0 };
+
+    //Use WPI_TalonSRX because those can be used in differential drives
+
     WPI_TalonSRX mtr_talonRight { 1 };
     WPI_TalonSRX mtr_talonLeft { 2 };
+
     ControlMode mode;
+
+    //Construct the Differential Drive
 
     DifferentialDrive drv_wheels {mtr_talonRight, mtr_talonLeft};
    
