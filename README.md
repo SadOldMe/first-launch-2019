@@ -5,10 +5,13 @@ When uploading a robot code file, please use the prefix "Robot_"
 
 Also, when creating objects, use these prefixes:
 
-- mtr_  for motor
-- drv_ for drive
-- btn_ for  button
-- joy_ for joystick
+- mtr_ : Generic motor controller
+- tln_  : Talon SRX motor controller
+- drv_ : differential drive
+- btn_ :  Button
+- joy_ : Joystick (controller)
+- enc_ : Encoder
+- sol_ : Solenoid
 
 Links & Downloads:
 
