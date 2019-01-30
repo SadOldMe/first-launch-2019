@@ -21,4 +21,4 @@ Links & Downloads:
 - http://www.ctr-electronics.com/downloads/api/cpp/html/index.html Phoenix ctre documentation
 
 To Fix Underline "#Include error cannot open source file" follow the instructions below, and then build the project:
-https://github.com/Microsoft/vscode-cpptools/blob/master/Documentation/LanguageServer/MinGW.md
+- https://github.com/Microsoft/vscode-cpptools/blob/master/Documentation/LanguageServer/MinGW.md
