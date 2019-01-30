@@ -19,3 +19,6 @@ Links & Downloads:
 - https://phoenix-documentation.readthedocs.io/en/latest/ch03_PrimerPhoenixSoft.html Info on talons
 - http://www.ctr-electronics.com/hro.html#product_tabs_technical_resources Downloads for talons. Download top link under installer. After opening installer, install only c++ codestuffs
 - http://www.ctr-electronics.com/downloads/api/cpp/html/index.html Phoenix ctre documentation
+
+To Fix Underline "#Include error cannot open source file" follow the instructions below, and then build the project:
+https://github.com/Microsoft/vscode-cpptools/blob/master/Documentation/LanguageServer/MinGW.md
