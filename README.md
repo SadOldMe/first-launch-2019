@@ -20,5 +20,7 @@ Links & Downloads:
 - http://www.ctr-electronics.com/hro.html#product_tabs_technical_resources Downloads for talons. Download top link under installer. After opening installer, install only c++ codestuffs
 - http://www.ctr-electronics.com/downloads/api/cpp/html/index.html Phoenix ctre documentation
 
+- Drive control sheet: button mapping and assignment: https://docs.google.com/spreadsheets/d/1E-bAHSgnoatJr_KeHHmoa92DA8d_zh-DKRiCKzLV5dk/edit?usp=sharing
+
 To Fix Underline "#Include error cannot open source file" follow the instructions below, and then build the project:
 - https://github.com/Microsoft/vscode-cpptools/blob/master/Documentation/LanguageServer/MinGW.md
