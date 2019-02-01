@@ -7,7 +7,6 @@
 #include <frc/Solenoid.h>
 #include <frc/drive/DifferentialDrive.h>
 #include <frc/Joystick.h>
-#include <frc/BuiltInAccelerometer.h>
 
 using namespace frc;
 
