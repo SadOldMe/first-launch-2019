@@ -56,7 +56,7 @@ void Robot::RobotInit() {
 
 void Robot::RobotPeriodic() {
   if(joy_driver.GetRawAxis(driver_leftStickY) > 0.1 || joy_driver.GetRawAxis(driver_rightStickY) > 0.1 || 
-     joy_driver.GetRawAxis(driver_leftStickY) < -0.1 || joy_driver.GetRawAxis(driver_rightStickY) < -0.01){ //the sticks were moved
+     joy_driver.GetRawAxis(driver_leftStickY) < -0.1 || joy_driver.GetRawAxis(driver_rightStickY) < -0.1){ //the sticks were moved
     accelMult += 0.01;
   }
 
