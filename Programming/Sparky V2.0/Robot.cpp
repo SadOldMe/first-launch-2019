@@ -21,7 +21,7 @@ WPI_TalonSRX tln_rightWheel { 2 }; //right motor
 Encoder enc_leftWheel { 0, 1 }; //left wheel encoder
 Encoder enc_rightWheel { 2, 3 }; //right wheel encoder
 
-DifferentialDrive drv_Wheels { tln_leftWheel, tln_rightWheel }; //left + right wheel diff. drive
+DifferentialDrive drv_wheels { tln_leftWheel, tln_rightWheel }; //left + right wheel diff. drive
 const double accelMultMin = 0.3; //minimum for the acceleration multiplier
 double accelMult = accelMultMin; //used to modify acceleration multiplier for the wheels
 const double accelMultMax = 0.75; //max for the acceleration multiplier
@@ -107,6 +107,7 @@ void Robot::AutonomousPeriodic() {
     while(enc_leftWheel.GetDistance() < 10) {
       drv_wheels.TankDrive(0.5, 0.5);
     }
+    
     drv_wheels.TankDrive(0, 0);
   }
 
@@ -115,7 +116,7 @@ void Robot::AutonomousPeriodic() {
 void Robot::TeleopInit() {}
 
 void Robot::TeleopPeriodic() {
-  drv_Wheels.TankDrive(joy_driver.GetRawAxis(driver_leftStickY) * accelMult, joy_driver.GetRawAxis(driver_rightStickY) * accelMult);
+  drv_wheels.TankDrive(joy_driver.GetRawAxis(driver_leftStickY) * accelMult, joy_driver.GetRawAxis(driver_rightStickY) * accelMult);
 
   tln_arm.Set(joy_codriver.GetRawAxis(co_stickY) * armAccelMult);
 }
