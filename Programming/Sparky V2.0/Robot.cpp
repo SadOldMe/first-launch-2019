@@ -9,6 +9,7 @@
 #include <frc/Joystick.h>
 #include <frc/BuiltInAccelerometer.h>
 #include <cameraserver/CameraServer.h>
+#include <wpi/raw_ostream.h>
 
 using namespace frc;
 
@@ -27,18 +28,19 @@ double accelMult = accelMultMin; //used to modify acceleration multiplier for th
 const double accelMultMax = 0.75; //max for the acceleration multiplier
 
 Joystick joy_driver { 0 }; //controller for main driver
-int driver_leftStickY = 1, driver_rightStickY = 3; //driver sticks
+int driver_leftStickY = 1, driver_rightStickY = 5; //driver sticks
 
 // CO-DRIVER //
-WPI_TalonSRX tln_arm { 3 }; //arm connected to Cargo In/Out box
+WPI_TalonSRX tln_arm { 5 }; //arm connected to Cargo In/Out box
 const double armAccelMultMin = 0.1; //minimum value for the arm acceleration multiplier
 double armAccelMult = armAccelMultMin; //acceleration multiplier for the double bar arm on the robot
 const double armAccelMultMax = 0.25; //max for the arm acceleration multiplier
 
-WPI_TalonSRX tln_cargoIO { 4 }; //axel + wheels used for intake and output of cargo balls
+WPI_VictorSPX tln_cargoIO { 7 }; //axel + wheels used for intake and output of cargo balls
 
 Joystick joy_codriver { 1 }; //controller for co driver (Arm control)
-int co_stickY = 0;
+int co_stickY = 1, co_cargoToggle = 2;
+bool cargoOn = false;
 
 // MISCELLANEOUS //
 const double pi = 3.1415926535897; //used for encoder distances
@@ -46,8 +48,14 @@ const double pi = 3.1415926535897; //used for encoder distances
 // End variable declaration //
 
 void Robot::RobotInit() {
-
-  CameraServer::GetInstance() -> StartAutomaticCapture();
+  /*
+  #if defined(__linux__)
+    CameraServer::GetInstance()->StartAutomaticCapture();
+  #else
+    wpi::errs() << "Vision only available on Linux.\n";
+    wpi::errs().flush();
+  #endif
+  */
 
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(kAutoNameCustom, kAutoNameCustom);
@@ -60,6 +68,8 @@ void Robot::RobotInit() {
   enc_leftWheel.SetSamplesToAverage(5);
   enc_leftWheel.SetDistancePerPulse(1.0 / 360.0 * 2.0 * pi * 3);
   enc_leftWheel.SetMinRate(1.0);
+
+  tln_arm.SetNeutralMode(NeutralMode::Brake);
 }
 
 void Robot::RobotPeriodic() {
@@ -118,7 +128,15 @@ void Robot::TeleopInit() {}
 void Robot::TeleopPeriodic() {
   drv_wheels.TankDrive(joy_driver.GetRawAxis(driver_leftStickY) * accelMult, joy_driver.GetRawAxis(driver_rightStickY) * accelMult);
 
-  tln_arm.Set(joy_codriver.GetRawAxis(co_stickY) * armAccelMult);
+  tln_arm.Set(joy_codriver.GetRawAxis(co_stickY) * 0.5);
+
+  if(joy_codriver.GetRawButton(co_cargoToggle)){
+    if(tln_cargoIO.Get() > 0.1){
+      tln_cargoIO.Set(0.0);
+    } else {
+      tln_cargoIO.Set(0.5);
+    }
+  }
 }
 
 //Use these functions to test controls BEFORE putting them in periodic classes.
